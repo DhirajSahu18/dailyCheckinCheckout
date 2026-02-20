@@ -1,0 +1,5 @@
+services:
+  checkin:
+    build: .
+    restart: always
+    container_name: checkin-scheduler
