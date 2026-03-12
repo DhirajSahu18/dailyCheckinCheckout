@@ -57,17 +57,16 @@ async function checkin(client, csrf, emp, type) {
     }
   );
 
-  console.log(`[${new Date().toISOString()}] ✅ ${type} recorded for ${emp}`);
+  console.log(`[${new Date().toISOString()}] ✅ `);
 }
 
 async function run(type) {
   for (const { email, password, emp } of ACCOUNTS) {
     try {
-      console.log(`\nProcessing ${email}...`);
       const { client, csrf } = await login(email, password);
       await checkin(client, csrf, emp, type);
     } catch (err) {
-      console.error(`❌ Failed for ${email}:`, err.message);
+      console.error(`❌ Failed :`, err.message);
     }
   }
 }
@@ -78,6 +77,4 @@ cron.schedule("30 9 * * 1-5", () => run("IN"), { timezone: "Asia/Kolkata" });
 // 7:30 PM IST — Check OUT (Mon–Fri)
 cron.schedule("32 19 * * 1-5", () => run("OUT"), { timezone: "Asia/Kolkata" });
 
-console.log("🕐 Scheduler started. Waiting for scheduled times (IST)...");
-console.log("   Check IN  → 9:30 AM IST  (Mon–Fri)");
-console.log("   Check OUT → 7:30 PM IST  (Mon–Fri)");
+console.log("Logs Incoming :");
